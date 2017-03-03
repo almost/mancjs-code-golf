@@ -1,0 +1,6 @@
+{
+  "title": "Yes? No?",
+  "input": true,
+  "output": "y",
+  "description": "Make a function (named 'play') that takes a boolean (true or false) and returns the string 'y' or 'n'"
+}

@@ -1,0 +1,6 @@
+{
+  "title": "The Nth Letter",
+  "input": 12,
+  "output": "l",
+  "description": "Make a function that takes a number n between 1 and 26 and returns the nth letter of the alphabet. For example play(1) would return 'a' and play(26) would return 'z'"
+}

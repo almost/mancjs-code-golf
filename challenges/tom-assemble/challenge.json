@@ -1,0 +1,6 @@
+{
+  "title": "JavaScript Assemble!",
+  "input": "add 10\nsubtract 2\nmultiply 3\nsubtract 4\nadd 9\nmultiply 10\nadd 989999",
+  "output": 990289,
+  "description": "Make a function that receives a string containing commands (one per line) and applies them to a number (that starts as 0). The commands are add, subtract and mulltiply. So if you get the string \"add 10\\nsubtract 2\\nmultiply 2\" the result would be 8."
+}

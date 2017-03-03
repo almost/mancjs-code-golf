@@ -3,7 +3,7 @@ var express = require('express');
 const challengeLibrary = require('../game/challenge-library');
 
 var auth = express.basicAuth(function(user, pass) {
-  return user === 'admin' && pass === 'admin';
+  return user === 'admin' && pass === 'bob';
 });
 
 var routes = function(app) {

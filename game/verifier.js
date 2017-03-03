@@ -1,6 +1,8 @@
 var fs = require('fs');
 var vm = require('vm');
 var _ = require('underscore');
+var babel = require('babel-core');
+var jsmin = require('jsmin').jsmin;
 
 var global = {};
 
@@ -34,26 +36,46 @@ process.on('message', function(entry) {
 
   try {
     var script = fs.readFileSync(entry.file, 'utf8');
+    console.log(script);
+    try {
+      script = babel.transform(script, {presets: ["es2015"]}).code;
+      console.log(script);
+    } catch (e) {
+      process.send({ valid: false, err: 'Babel transform failed, try it on https://babeljs.io/repl/ (es2015 preset)' });
+      return;
+    }
     script = 'Array.prototype.sort = function() { throw true; }; ' + script;
+    console.log(script);
     vm.runInNewContext(script, global);
+    console.log('done');
 
     if (!global.play) {
+      console.log('no global play');
       return process.send({ valid: false, err: 'No global play function defined' });
     }
 
-    var actualOutput = global.play(eval(entry.input));
-    var expectedOutput = eval(entry.output);
+    console.log('input', entry.input);
+    var inputs = entry.input.split('$').map(function (x) {return eval('(' + x + ')')});
+    var actualOutput = global.play.apply(null, inputs);
 
-    if (_.isArray(actualOutput) && _.isArray(expectedOutput)) {
-      if (actualOutput.toString() !== expectedOutput.toString()) {
-        return error(expectedOutput, actualOutput);
-      }
-    } else if (actualOutput !== expectedOutput) {
+    var expectedOutput = eval('(' + entry.output + ')');
+    if (expectedOutput === 'quine') {
+      // expectedOutput = jsmin(fs.readFileSync(entry.file, 'utf8')).replace(/^\n+/, '');
+      // actualOutput = jsmin(actualOutput).replace(/^\n+/, '');
+
+      expectedOutput = fs.readFileSync(entry.file, 'utf8').trim();
+      actualOutput = actualOutput.trim();
+    }
+    console.log('actual', actualOutput);
+    console.log('expected', expectedOutput);
+
+    if (!_.isEqual(actualOutput, expectedOutput)) {
       return error(expectedOutput, actualOutput);
     }
 
     process.send({ valid: true });
   } catch (err) {
+    console.log('ERROR FROM SCRIPT', err);
     process.send({ valid: false, err: 'Your script is broken' });
   }
 });

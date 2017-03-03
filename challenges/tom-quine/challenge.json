@@ -1,0 +1,6 @@
+{
+  "title": "Quine!",
+  "input": "null",
+  "output": "quine",
+  "description": "Make a quine (a program that outputs it's own source code). Code will be run through jsmin before comparison"
+}

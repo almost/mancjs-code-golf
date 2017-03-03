@@ -1,0 +1,7 @@
+{
+  "title": "To the power of JavaScript",
+  "input": 30,
+  "output": 1073741824,
+  "description": "Make a function that takes a number between 1 and 30 and returns 2 raised to the power of that number (eg 2^n). (you can use ES2015 but nothing beyond that)"
+  
+}

@@ -1,0 +1,6 @@
+{
+  "title": "What's a Regional Indicator Symbol?",
+  "input": ["IT", "CN", "US", "ES", "DE", "JP", "KR", "RU", "FR", "GB"],
+  "output": ["🇮🇹","🇨🇳","🇺🇸","🇪🇸","🇩🇪","🇯🇵","🇰🇷","🇷🇺","🇫🇷","🇬🇧"],
+  "description": "Make a function that takes an array of two letter ISO country codes (eg [\"GB\", \"US\"]) and produces an array of unicode/emoji flags (eg [\"🇬🇧\",\"🇺🇸\"]). Only needs to support the ten countries in the core set: CN, DE, ES, FR, GB, IT, JP, KR, RU, US (🇮🇹, 🇨🇳, 🇺🇸, 🇪🇸, 🇩🇪, 🇯🇵, 🇰🇷, 🇷🇺, 🇫🇷, 🇬🇧)"
+}
